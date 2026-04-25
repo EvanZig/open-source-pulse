@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Capriola } from 'next/font/google';
 import { Toaster } from 'sonner';
 
 import { QueryProvider } from '@/providers/QueryProvider';
@@ -7,7 +7,8 @@ import { cn } from '@/lib/utils';
 
 import './globals.css';
 
-const inter = Inter({
+const capriola = Capriola({
+  weight: '400',
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
@@ -34,7 +35,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={cn('bg-background min-h-screen font-sans antialiased', inter.variable)}>
+      <body className={cn('bg-background min-h-screen font-sans antialiased', capriola.variable)}>
         <QueryProvider>
           {children}
           <Toaster richColors closeButton position="bottom-right" />
