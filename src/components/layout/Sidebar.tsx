@@ -2,6 +2,7 @@ import { ChevronRight, Filter } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const languages = [
   { label: 'TypeScript', tone: 'bg-sky-500/80' },
@@ -13,9 +14,13 @@ const languages = [
 const difficultyLevels = ['Beginner', 'Intermediate', 'Advanced'];
 const activeRepositories = ['vercel/next.js', 'facebook/react', 'rust-lang/rust'];
 
-export function Sidebar() {
+type SidebarProps = {
+  className?: string;
+};
+
+export function Sidebar({ className }: SidebarProps) {
   return (
-    <aside className="hidden w-72 shrink-0 flex-col gap-4 lg:flex">
+    <aside className={cn('flex flex-col gap-4', className)}>
       <div className="bg-card/60 rounded-2xl border border-white/10 p-4">
         <div className="flex items-center justify-between">
           <div>
