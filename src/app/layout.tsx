@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Capriola } from 'next/font/google';
+import { Atkinson_Hyperlegible, Capriola } from 'next/font/google';
 import { Toaster } from 'sonner';
 
 import { QueryProvider } from '@/providers/QueryProvider';
@@ -11,6 +11,13 @@ const capriola = Capriola({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-sans',
+  display: 'swap',
+});
+
+const atkinsonHyperlegible = Atkinson_Hyperlegible({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-readable',
   display: 'swap',
 });
 
@@ -35,7 +42,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={cn('bg-background min-h-screen font-sans antialiased', capriola.variable)}>
+      <body
+        className={cn(
+          'bg-background min-h-screen font-sans antialiased',
+          capriola.variable,
+          atkinsonHyperlegible.variable,
+        )}
+      >
         <QueryProvider>
           {children}
           <Toaster richColors closeButton position="bottom-right" />
