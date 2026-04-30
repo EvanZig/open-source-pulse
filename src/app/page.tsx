@@ -67,6 +67,168 @@ const issues: IssueCardProps[] = [
     updated: '3 days ago',
     comments: 11,
   },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
+  {
+    repo: 'microsoft/TypeScript',
+    title: 'Validate readonly tuple inference in mapped types',
+    description:
+      'Add coverage to ensure readonly tuples preserve literal inference across mapped helpers.',
+    tags: ['Help Wanted', 'TypeScript'],
+    updated: '3 days ago',
+    comments: 11,
+  },
 ];
 
 export default async function HomePage() {
