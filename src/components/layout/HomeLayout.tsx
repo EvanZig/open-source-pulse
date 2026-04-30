@@ -19,7 +19,7 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
 
   return (
     <main className="relative min-h-screen">
-      <div className="pointer-events-none absolute inset-0 -z-10">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-[-20%] left-[-10%] h-[520px] w-[520px] rounded-full bg-sky-500/10 blur-[120px]" />
         <div className="absolute top-[10%] right-[-5%] h-[420px] w-[420px] rounded-full bg-indigo-500/10 blur-[130px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.04),_transparent_55%)]" />
