@@ -1,4 +1,4 @@
-import { Bell, Search, Settings, User } from 'lucide-react';
+import { Bell, Menu, Search, Settings, User } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,11 +15,29 @@ const navItems: NavItem[] = [
   { label: 'Saved' },
 ];
 
-export function TopNav() {
+type TopNavProps = {
+  onToggleSidebar?: () => void;
+  isSidebarOpen?: boolean;
+};
+
+export function TopNav({ onToggleSidebar, isSidebarOpen }: TopNavProps) {
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4">
-      <div className="flex items-center gap-8">
+    <header className="supports-[backdrop-filter]:bg-background/15 sticky top-0 z-30 flex flex-nowrap items-center justify-between gap-3 bg-transparent px-4 py-3 backdrop-blur sm:gap-4 sm:px-6">
+      <div className="flex items-center gap-4 sm:gap-8">
         <div className="flex items-center gap-3">
+          {onToggleSidebar ? (
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={isSidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+              aria-controls="mobile-sidebar"
+              aria-expanded={isSidebarOpen}
+              className="h-8 w-8 lg:hidden"
+              onClick={onToggleSidebar}
+            >
+              <Menu className="h-4 w-4" />
+            </Button>
+          ) : null}
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400/80 via-indigo-500/70 to-violet-500/80 text-xs font-semibold text-white">
             OS
           </div>
@@ -46,12 +64,12 @@ export function TopNav() {
         </nav>
       </div>
 
-      <div className="flex flex-1 items-center justify-end gap-3">
-        <div className="relative hidden w-full max-w-md xl:block">
+      <div className="flex items-center justify-end gap-3">
+        <div className="relative hidden w-full max-w-md lg:block">
           <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
           <Input placeholder="Search issues, repos, labels..." />
         </div>
-        <Button variant="ghost" size="icon" aria-label="Search" className="xl:hidden">
+        <Button variant="ghost" size="icon" aria-label="Search" className="lg:hidden">
           <Search className="h-4 w-4" />
         </Button>
         <Button variant="ghost" size="icon" aria-label="Notifications">

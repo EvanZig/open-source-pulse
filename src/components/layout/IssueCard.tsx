@@ -38,7 +38,7 @@ export function IssueCard({ repo, title, description, tags, updated, comments }:
           ))}
         </div>
       </CardContent>
-      <CardFooter className="text-muted-foreground text-xs">
+      <CardFooter className="text-muted-foreground flex-wrap gap-2 text-xs">
         <span>{updated}</span>
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1">
