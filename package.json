@@ -4,7 +4,7 @@
   "private": true,
   "description": "GitHub Explorer dashboard that tracks popular repositories for Good First Issues and Help Wanted tags.",
   "scripts": {
-    "dev": "xdg-open http://localhost:3000 & next dev",
+    "dev": "xdg-open http://localhost:3000 & next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
