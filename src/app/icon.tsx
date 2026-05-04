@@ -1,13 +1,25 @@
-import { cn } from '@/lib/utils';
+import { ImageResponse } from 'next/og';
 
-type LogoMarkProps = {
-  className?: string;
+export const size = {
+  width: 64,
+  height: 64,
 };
 
-export function LogoMark({ className }: LogoMarkProps) {
-  return (
-    <div className={cn('relative h-11 w-11 shrink-0', className)} aria-hidden="true">
-      <svg viewBox="0 0 64 64" className="h-full w-full" role="img" focusable="false">
+export const contentType = 'image/png';
+
+export default function Icon() {
+  return new ImageResponse(
+    <div
+      style={{
+        width: '64px',
+        height: '64px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+      }}
+    >
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
         <defs>
           <linearGradient id="logo-base" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#10b981" />
@@ -52,6 +64,9 @@ export function LogoMark({ className }: LogoMarkProps) {
         <circle cx="24" cy="36" r="3" fill="rgba(255, 255, 255, 0.85)" />
         <circle cx="42" cy="30" r="2.4" fill="rgba(255, 255, 255, 0.75)" />
       </svg>
-    </div>
+    </div>,
+    {
+      ...size,
+    },
   );
 }
