@@ -12,7 +12,7 @@ import { HomeLayout } from '@/components/layout/HomeLayout';
  */
 export const revalidate = 3600;
 
-const issues: IssueCardProps[] = [
+const issueSeed: Omit<IssueCardProps, 'id'>[] = [
   {
     repo: 'vercel/next.js',
     title: 'Fix hydration error when using Suspense boundaries in App Router',
@@ -230,6 +230,11 @@ const issues: IssueCardProps[] = [
     comments: 11,
   },
 ];
+
+const issues: IssueCardProps[] = issueSeed.map((issue, index) => ({
+  ...issue,
+  id: `${issue.repo}-${issue.title}-${index}`,
+}));
 
 export default async function HomePage() {
   return <HomeLayout issues={issues} />;
