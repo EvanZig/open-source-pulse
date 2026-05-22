@@ -14,40 +14,48 @@ export type IssueCardProps = {
 };
 
 const tagStyles: Record<string, string> = {
-  'Good First Issue': 'bg-sky-500/15 text-sky-200 border-sky-500/30',
-  TypeScript: 'bg-indigo-500/15 text-indigo-200 border-indigo-500/30',
-  Rust: 'bg-orange-500/15 text-orange-200 border-orange-500/30',
-  Bug: 'bg-rose-500/15 text-rose-200 border-rose-500/30',
-  Docs: 'bg-emerald-500/15 text-emerald-200 border-emerald-500/30',
-  'Help Wanted': 'bg-violet-500/15 text-violet-200 border-violet-500/30',
+  'Good First Issue': 'bg-ctp-teal/15 text-ctp-teal border-ctp-teal/30',
+  TypeScript: 'bg-ctp-blue/15 text-ctp-blue border-ctp-blue/30',
+  Rust: 'bg-ctp-peach/15 text-ctp-peach border-ctp-peach/30',
+  Bug: 'bg-ctp-red/15 text-ctp-red border-ctp-red/30',
+  Docs: 'bg-ctp-green/15 text-ctp-green border-ctp-green/30',
+  'Help Wanted': 'bg-ctp-mauve/15 text-ctp-mauve border-ctp-mauve/30',
 };
+
+import { cn } from '@/lib/utils';
 
 export function IssueCard({ repo, title, description, tags, updated, comments }: IssueCardProps) {
   return (
-    <Card className="flex h-full flex-col font-[var(--font-readable)]">
+    <Card className="group flex h-full flex-col font-[var(--font-readable)]">
       <CardHeader>
-        <p className="text-muted-foreground text-xs">{repo}</p>
-        <CardTitle>{title}</CardTitle>
+        <p className="text-muted-foreground text-xs font-semibold tracking-wide transition-colors group-hover:text-ctp-mauve/80">{repo}</p>
+        <CardTitle className="transition-colors group-hover:text-foreground">{title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-1">
-        <p className="text-muted-foreground text-sm">{description}</p>
+        <p className="text-muted-foreground/80 text-sm leading-relaxed">{description}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {tags.map((tag) => (
-            <Badge key={tag} className={tagStyles[tag] ?? ''}>
+            <Badge
+              key={tag}
+              className={cn(
+                'cursor-default transition-all duration-300 hover:scale-105 hover:-translate-y-0.5',
+                tagStyles[tag] ?? '',
+              )}
+            >
               {tag}
             </Badge>
           ))}
         </div>
       </CardContent>
-      <CardFooter className="text-muted-foreground flex-wrap gap-2 text-xs">
+      <CardFooter className="text-muted-foreground/70 flex-wrap gap-2 text-xs border-t border-border/20 pt-4">
         <span>{updated}</span>
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1">
-            <MessageCircle className="h-3.5 w-3.5" />
+          <span className="flex cursor-pointer items-center gap-1.5 transition-colors hover:text-ctp-mauve">
+            <MessageCircle className="h-3.5 w-3.5 transition-transform duration-300 hover:scale-125" />
             {comments}
           </span>
-          <span className="flex items-center gap-1">
-            <Star className="h-3.5 w-3.5" />
+          <span className="flex cursor-pointer items-center gap-1.5 transition-colors hover:text-ctp-yellow">
+            <Star className="h-3.5 w-3.5 transition-transform duration-300 hover:scale-125" />
             Save
           </span>
         </div>

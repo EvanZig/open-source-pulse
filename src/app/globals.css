@@ -2,33 +2,33 @@
 @import 'tw-animate-css';
 
 :root {
-  --background: hsl(240 10% 3.9%);
-  --foreground: hsl(0 0% 98%);
+  --background: hsl(240 21% 15%);       /* Base (#1e1e2e) */
+  --foreground: hsl(226 64% 88%);       /* Text (#cdd6f4) */
 
-  --card: hsl(240 10% 3.9%);
-  --card-foreground: hsl(0 0% 98%);
+  --card: hsl(240 21% 12%);             /* Mantle (#181825) */
+  --card-foreground: hsl(226 64% 88%);  /* Text (#cdd6f4) */
 
-  --popover: hsl(240 10% 3.9%);
-  --popover-foreground: hsl(0 0% 98%);
+  --popover: hsl(240 23% 9%);           /* Crust (#11111b) */
+  --popover-foreground: hsl(226 64% 88%);/* Text (#cdd6f4) */
 
-  --primary: hsl(0 0% 98%);
-  --primary-foreground: hsl(240 5.9% 10%);
+  --primary: hsl(267 84% 81%);          /* Mauve (#cba6f7) */
+  --primary-foreground: hsl(240 23% 9%);/* Crust (#11111b) */
 
-  --secondary: hsl(240 3.7% 15.9%);
-  --secondary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(237 16% 23%);        /* Surface0 (#313244) */
+  --secondary-foreground: hsl(226 64% 88%);/* Text (#cdd6f4) */
 
-  --muted: hsl(240 3.7% 15.9%);
-  --muted-foreground: hsl(240 5% 64.9%);
+  --muted: hsl(237 16% 23%);            /* Surface0 (#313244) */
+  --muted-foreground: hsl(228 20% 72%); /* Subtext0 (#a6adc8) */
 
-  --accent: hsl(240 3.7% 15.9%);
-  --accent-foreground: hsl(0 0% 98%);
+  --accent: hsl(234 13% 31%);           /* Surface1 (#45475a) */
+  --accent-foreground: hsl(267 84% 81%);/* Mauve (#cba6f7) */
 
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(0 0% 98%);
+  --destructive: hsl(343 81% 75%);      /* Red (#f38ba8) */
+  --destructive-foreground: hsl(240 23% 9%);/* Crust (#11111b) */
 
-  --border: hsl(240 3.7% 15.9%);
-  --input: hsl(240 3.7% 15.9%);
-  --ring: hsl(240 4.9% 83.9%);
+  --border: hsl(237 16% 23%);           /* Surface0 (#313244) */
+  --input: hsl(234 13% 31%);            /* Surface1 (#45475a) */
+  --ring: hsl(267 84% 81%);             /* Mauve (#cba6f7) */
 
   --radius: 0.5rem;
 }
@@ -63,6 +63,33 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  --color-ctp-rosewater: #f5e0dc;
+  --color-ctp-flamingo: #f2cdcd;
+  --color-ctp-pink: #f5c2e7;
+  --color-ctp-mauve: #cba6f7;
+  --color-ctp-red: #f38ba8;
+  --color-ctp-maroon: #eba0ac;
+  --color-ctp-peach: #fab387;
+  --color-ctp-yellow: #f9e2af;
+  --color-ctp-green: #a6e3a1;
+  --color-ctp-teal: #94e2d5;
+  --color-ctp-sky: #89dceb;
+  --color-ctp-sapphire: #74c7ec;
+  --color-ctp-blue: #89b4fa;
+  --color-ctp-lavender: #b4befe;
+  --color-ctp-text: #cdd6f4;
+  --color-ctp-subtext1: #bac2de;
+  --color-ctp-subtext0: #a6adc8;
+  --color-ctp-overlay2: #9399b2;
+  --color-ctp-overlay1: #7f849c;
+  --color-ctp-overlay0: #6c7086;
+  --color-ctp-surface2: #585b70;
+  --color-ctp-surface1: #45475a;
+  --color-ctp-surface0: #313244;
+  --color-ctp-base: #1e1e2e;
+  --color-ctp-mantle: #181825;
+  --color-ctp-crust: #11111b;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -102,7 +129,7 @@
 
 @layer utilities {
   .app-scrollbar {
-    scrollbar-color: rgba(94, 234, 212, 0.6) rgba(15, 23, 42, 0.35);
+    scrollbar-color: rgba(203, 166, 247, 0.6) rgba(17, 17, 27, 0.35);
   }
 
   .app-scrollbar::-webkit-scrollbar {
@@ -111,18 +138,18 @@
   }
 
   .app-scrollbar::-webkit-scrollbar-track {
-    background: rgba(15, 23, 42, 0.35);
+    background: rgba(17, 17, 27, 0.35);
     border-radius: 999px;
   }
 
   .app-scrollbar::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, rgba(94, 234, 212, 0.75), rgba(56, 189, 248, 0.65));
-    border: 2px solid rgba(15, 23, 42, 0.35);
+    background: linear-gradient(180deg, rgba(203, 166, 247, 0.75), rgba(180, 190, 254, 0.65));
+    border: 2px solid rgba(17, 17, 27, 0.35);
     border-radius: 999px;
   }
 
   .app-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, rgba(94, 234, 212, 0.9), rgba(56, 189, 248, 0.85));
+    background: linear-gradient(180deg, rgba(203, 166, 247, 0.9), rgba(180, 190, 254, 0.85));
   }
 
   .sidebar-scrollbar {
@@ -142,5 +169,8 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    background-image: radial-gradient(rgba(203, 166, 247, 0.08) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
   }
 }

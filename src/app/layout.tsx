@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Atkinson_Hyperlegible, Capriola } from 'next/font/google';
+import { Atkinson_Hyperlegible, Plus_Jakarta_Sans } from 'next/font/google';
 import { Toaster } from 'sonner';
 
 import { QueryProvider } from '@/providers/QueryProvider';
@@ -7,8 +7,7 @@ import { cn } from '@/lib/utils';
 
 import './globals.css';
 
-const capriola = Capriola({
-  weight: '400',
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
@@ -45,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={cn(
           'bg-background min-h-screen font-sans antialiased',
-          capriola.variable,
+          plusJakartaSans.variable,
           atkinsonHyperlegible.variable,
         )}
       >

@@ -37,7 +37,7 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
             <div className="hidden sm:block">
               <p className="text-sm font-semibold">
                 Open Source{' '}
-                <span className="bg-gradient-to-r from-emerald-200 via-cyan-200 to-amber-200 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-ctp-green via-ctp-teal to-ctp-peach bg-clip-text text-transparent">
                   Pulse
                 </span>
               </p>
@@ -60,7 +60,7 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
                   className={cn(
                     'rounded-full px-4',
                     isActive &&
-                      'text-foreground bg-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.12)]',
+                      'text-foreground bg-ctp-surface0 shadow-[0_0_0_1px_rgba(203,166,247,0.2)]',
                   )}
                 >
                   {item}
@@ -105,7 +105,7 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
               onClick={() => onSelectItem?.(item)}
               className={cn(
                 'shrink-0 rounded-full px-4',
-                isActive && 'text-foreground bg-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.12)]',
+                isActive && 'text-foreground bg-ctp-surface0 shadow-[0_0_0_1px_rgba(203,166,247,0.2)]',
               )}
             >
               {item}

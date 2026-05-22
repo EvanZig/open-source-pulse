@@ -8,7 +8,7 @@ export function Card({ className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        'bg-card/60 rounded-2xl border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur',
+        'bg-gradient-to-br from-ctp-mantle/95 via-ctp-mantle/90 to-ctp-base/80 backdrop-blur-xl rounded-2xl border border-border/50 shadow-xl transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:-translate-y-1.5 hover:border-ctp-mauve/45 hover:shadow-[0_12px_32px_-8px_rgba(203,166,247,0.18)]',
         className,
       )}
       {...props}
