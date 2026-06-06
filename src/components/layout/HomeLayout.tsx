@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react';
+import { ChevronDown, ChevronLeft, ChevronRight, SlidersHorizontal, Frown } from 'lucide-react';
 
 import { IssueCard, type IssueCardProps } from '@/components/layout/IssueCard';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { TopNav } from '@/components/layout/TopNav';
 import { Button } from '@/components/ui/button';
+import { useUIStore } from '@/store/uiStore';
 import { cn } from '@/lib/utils';
 
 type HomeLayoutProps = {
@@ -20,11 +21,17 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [activeNavItem, setActiveNavItem] = useState<NavItemLabel>('Explore');
   const isExploreView = activeNavItem === 'Explore';
+  const selectedRepos = useUIStore((state) => state.selectedRepos);
+
+  const filteredIssues =
+    isExploreView && selectedRepos.length > 0
+      ? issues.filter((issue) => selectedRepos.includes(issue.repo))
+      : issues;
 
   const navCopy: Record<NavItemLabel, { title: string; description: string }> = {
     Explore: {
       title: 'Explore issues',
-      description: 'Found 142 relevant issues matching your developer profile.',
+      description: `Found ${filteredIssues.length} relevant issues matching your filters.`,
     },
     'My Issues': {
       title: 'My issues',
@@ -39,8 +46,8 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
   return (
     <main className="relative h-screen overflow-x-visible overflow-y-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] h-[520px] w-[520px] rounded-full bg-ctp-pink/10 blur-[120px]" />
-        <div className="absolute top-[10%] right-[-5%] h-[420px] w-[420px] rounded-full bg-ctp-mauve/10 blur-[130px]" />
+        <div className="bg-ctp-pink/10 absolute top-[-20%] left-[-10%] h-[520px] w-[520px] rounded-full blur-[120px]" />
+        <div className="bg-ctp-mauve/10 absolute top-[10%] right-[-5%] h-[420px] w-[420px] rounded-full blur-[130px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.04),_transparent_55%)]" />
       </div>
 
@@ -64,7 +71,7 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
           <div
             id="mobile-sidebar"
             className={cn(
-              'sidebar-scrollbar bg-background/95 absolute top-0 left-0 z-99 h-full w-[85%] max-w-xs overflow-y-auto border-r border-border/60 backdrop-blur transition-transform duration-300',
+              'sidebar-scrollbar bg-background/95 border-border/60 absolute top-0 left-0 z-99 h-full w-[85%] max-w-xs overflow-y-auto border-r backdrop-blur transition-transform duration-300',
               isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full',
             )}
           >
@@ -74,7 +81,7 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
 
         <div
           className={cn(
-            'sidebar-scrollbar relative hidden shrink-0 overflow-x-visible overflow-y-auto border-r border-border/30 transition-[width] duration-300 lg:block lg:h-screen',
+            'sidebar-scrollbar border-border/30 relative hidden shrink-0 overflow-x-visible overflow-y-auto border-r transition-[width] duration-300 lg:block lg:h-screen',
             isSidebarOpen ? 'lg:w-72' : 'lg:w-14',
           )}
         >
@@ -93,7 +100,7 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
             aria-label={isSidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             aria-expanded={isSidebarOpen}
             className={cn(
-              'bg-background/80 text-foreground absolute top-93 right-[-1] z-99 hidden rounded-full border border-border/60 shadow-[0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur lg:inline-flex',
+              'bg-background/80 text-foreground border-border/60 absolute top-93 right-[-1] z-99 hidden rounded-full border shadow-[0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur lg:inline-flex',
             )}
             onClick={() => setSidebarOpen((open) => !open)}
           >
@@ -134,13 +141,23 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
             </div>
 
             {isExploreView ? (
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {issues.map((issue) => (
-                  <IssueCard key={issue.id} {...issue} />
-                ))}
-              </div>
+              filteredIssues.length > 0 ? (
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {filteredIssues.map((issue) => (
+                    <IssueCard key={issue.id} {...issue} />
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-card/40 text-muted-foreground border-border/60 flex min-h-[260px] flex-col items-center justify-center rounded-2xl border px-6 text-center text-sm">
+                  <Frown className="text-muted-foreground/50 mb-4 h-10 w-10" />
+                  <p className="text-foreground text-base font-semibold">No issues found</p>
+                  <p className="text-muted-foreground mt-2 max-w-md">
+                    Try adding or removing some active repositories from the sidebar.
+                  </p>
+                </div>
+              )
             ) : (
-              <div className="bg-card/40 text-muted-foreground flex min-h-[260px] flex-col items-center justify-center rounded-2xl border border-border/60 px-6 text-center text-sm">
+              <div className="bg-card/40 text-muted-foreground border-border/60 flex min-h-[260px] flex-col items-center justify-center rounded-2xl border px-6 text-center text-sm">
                 <p className="text-foreground text-base font-semibold">
                   {activeNavItem === 'My Issues' ? 'No active issues yet.' : 'Nothing saved yet.'}
                 </p>

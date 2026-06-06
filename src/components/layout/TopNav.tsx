@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import { Bell, Menu, Search, Settings, User } from 'lucide-react';
 
 import { LogoMark } from '@/components/layout/LogoMark';
@@ -7,6 +10,30 @@ import { cn } from '@/lib/utils';
 
 const navItems = ['Explore', 'My Issues', 'Saved'];
 
+const mockNotifications = [
+  {
+    id: 1,
+    title: 'New issue assignment',
+    description: 'You have been assigned to #142 on vercel/next.js',
+    time: '2m ago',
+    unread: true,
+  },
+  {
+    id: 2,
+    title: 'Mentioned in PR',
+    description: 'You were mentioned in a comment on facebook/react',
+    time: '1h ago',
+    unread: true,
+  },
+  {
+    id: 3,
+    title: 'Issue closed',
+    description: 'Issue #84 on rust-lang/rust was closed',
+    time: '1d ago',
+    unread: false,
+  },
+];
+
 type TopNavProps = {
   onToggleSidebar?: () => void;
   isSidebarOpen?: boolean;
@@ -15,6 +42,8 @@ type TopNavProps = {
 };
 
 export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectItem }: TopNavProps) {
+  const [showNotifications, setShowNotifications] = useState(false);
+
   return (
     <header className="supports-[backdrop-filter]:bg-background/15 sticky top-0 z-30 flex flex-col gap-3 bg-transparent px-4 py-3 backdrop-blur sm:px-6">
       <div className="flex items-center justify-between gap-3 sm:gap-4">
@@ -37,7 +66,7 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
             <div className="hidden sm:block">
               <p className="text-sm font-semibold">
                 Open Source{' '}
-                <span className="bg-gradient-to-r from-ctp-green via-ctp-teal to-ctp-peach bg-clip-text text-transparent">
+                <span className="from-ctp-green via-ctp-teal to-ctp-peach bg-gradient-to-r bg-clip-text text-transparent">
                   Pulse
                 </span>
               </p>
@@ -78,9 +107,64 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
           <Button variant="ghost" size="icon" aria-label="Search" className="lg:hidden">
             <Search className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="icon" aria-label="Notifications">
-            <Bell className="h-4 w-4" />
-          </Button>
+
+          <div className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Notifications"
+              onClick={() => setShowNotifications(!showNotifications)}
+            >
+              <Bell className="h-4 w-4" />
+              <span className="absolute top-2 right-2 flex h-2 w-2">
+                <span className="bg-ctp-mauve absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+                <span className="bg-ctp-mauve relative inline-flex h-2 w-2 rounded-full" />
+              </span>
+            </Button>
+
+            {showNotifications && (
+              <div className="border-border/60 bg-card absolute right-0 z-50 mt-2 flex w-80 flex-col gap-3 rounded-xl border p-4 shadow-lg">
+                <div className="mb-1 flex items-center justify-between">
+                  <h3 className="text-sm font-semibold">Notifications</h3>
+                  <button
+                    type="button"
+                    className="text-muted-foreground hover:text-foreground cursor-pointer text-xs transition-colors"
+                  >
+                    Mark all as read
+                  </button>
+                </div>
+                <div className="app-scrollbar flex max-h-[300px] flex-col gap-2 overflow-y-auto pr-1">
+                  {mockNotifications.map((n) => (
+                    <div
+                      key={n.id}
+                      className={cn(
+                        'border-border/30 flex flex-col gap-1 rounded-lg border p-3 text-left transition-colors',
+                        n.unread ? 'bg-ctp-surface0/40' : 'hover:bg-ctp-surface0/20 bg-transparent',
+                      )}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <span
+                          className={cn(
+                            'text-sm font-medium',
+                            n.unread ? 'text-foreground' : 'text-muted-foreground',
+                          )}
+                        >
+                          {n.title}
+                        </span>
+                        <span className="text-muted-foreground text-[10px] whitespace-nowrap">
+                          {n.time}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground line-clamp-2 text-xs leading-relaxed">
+                        {n.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           <Button variant="ghost" size="icon" aria-label="Settings">
             <Settings className="h-4 w-4" />
           </Button>
@@ -105,7 +189,8 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
               onClick={() => onSelectItem?.(item)}
               className={cn(
                 'shrink-0 rounded-full px-4',
-                isActive && 'text-foreground bg-ctp-surface0 shadow-[0_0_0_1px_rgba(203,166,247,0.2)]',
+                isActive &&
+                  'text-foreground bg-ctp-surface0 shadow-[0_0_0_1px_rgba(203,166,247,0.2)]',
               )}
             >
               {item}

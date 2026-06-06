@@ -4,16 +4,20 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 export interface UIState {
   sidebarOpen: boolean;
   activeLanguageFilter: string | null;
+  selectedRepos: string[];
 
   toggleSidebar: () => void;
   setSidebarOpen: (open: boolean) => void;
   setActiveLanguageFilter: (language: string | null) => void;
+  addSelectedRepo: (repo: string) => void;
+  removeSelectedRepo: (repo: string) => void;
   reset: () => void;
 }
 
-const INITIAL_STATE: Pick<UIState, 'sidebarOpen' | 'activeLanguageFilter'> = {
+const INITIAL_STATE: Pick<UIState, 'sidebarOpen' | 'activeLanguageFilter' | 'selectedRepos'> = {
   sidebarOpen: true,
   activeLanguageFilter: null,
+  selectedRepos: [],
 };
 
 /**
@@ -30,6 +34,16 @@ export const useUIStore = create<UIState>()(
       toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
       setSidebarOpen: (sidebarOpen) => set({ sidebarOpen }),
       setActiveLanguageFilter: (activeLanguageFilter) => set({ activeLanguageFilter }),
+      addSelectedRepo: (repo) =>
+        set((state) => ({
+          selectedRepos: state.selectedRepos.includes(repo)
+            ? state.selectedRepos
+            : [...state.selectedRepos, repo],
+        })),
+      removeSelectedRepo: (repo) =>
+        set((state) => ({
+          selectedRepos: state.selectedRepos.filter((r) => r !== repo),
+        })),
       reset: () => set({ ...INITIAL_STATE }),
     }),
     {
@@ -37,6 +51,7 @@ export const useUIStore = create<UIState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         sidebarOpen: state.sidebarOpen,
+        selectedRepos: state.selectedRepos,
       }),
     },
   ),
