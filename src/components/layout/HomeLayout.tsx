@@ -1,34 +1,44 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ChevronDown, ChevronLeft, ChevronRight, SlidersHorizontal, Frown } from 'lucide-react';
 
 import { IssueCard, type IssueCardProps } from '@/components/layout/IssueCard';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { TopNav } from '@/components/layout/TopNav';
 import { Button } from '@/components/ui/button';
-import { useUIStore } from '@/store/uiStore';
+import { useUIStore, type DefaultTab } from '@/store/uiStore';
 import { cn } from '@/lib/utils';
 
 type HomeLayoutProps = {
   issues: IssueCardProps[];
 };
 
-type NavItemLabel = 'Explore' | 'My Issues' | 'Saved';
-
 export function HomeLayout({ issues }: HomeLayoutProps) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [activeNavItem, setActiveNavItem] = useState<NavItemLabel>('Explore');
+  const defaultTab = useUIStore((s) => s.settings.defaultTab);
+  const [activeNavItem, setActiveNavItem] = useState<DefaultTab>(defaultTab);
   const isExploreView = activeNavItem === 'Explore';
-  const selectedRepos = useUIStore((state) => state.selectedRepos);
 
-  const filteredIssues =
-    isExploreView && selectedRepos.length > 0
-      ? issues.filter((issue) => selectedRepos.includes(issue.repo))
-      : issues;
+  const selectedRepos = useUIStore((s) => s.selectedRepos);
+  const selectedLanguages = useUIStore((s) => s.selectedLanguages);
 
-  const navCopy: Record<NavItemLabel, { title: string; description: string }> = {
+  const filteredIssues = useMemo(() => {
+    if (!isExploreView) return issues;
+    let result = issues;
+    if (selectedRepos.length > 0) {
+      result = result.filter((issue) => selectedRepos.includes(issue.repo));
+    }
+    if (selectedLanguages.length > 0) {
+      result = result.filter((issue) =>
+        issue.tags.some((tag) => selectedLanguages.includes(tag)),
+      );
+    }
+    return result;
+  }, [issues, isExploreView, selectedRepos, selectedLanguages]);
+
+  const navCopy: Record<DefaultTab, { title: string; description: string }> = {
     Explore: {
       title: 'Explore issues',
       description: `Found ${filteredIssues.length} relevant issues matching your filters.`,
@@ -117,7 +127,7 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
             onToggleSidebar={() => setMobileSidebarOpen((open) => !open)}
             isSidebarOpen={isMobileSidebarOpen}
             activeItem={activeNavItem}
-            onSelectItem={(item) => setActiveNavItem(item as NavItemLabel)}
+            onSelectItem={(item) => setActiveNavItem(item as DefaultTab)}
           />
 
           <section className="flex flex-1 flex-col gap-6">
