@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type CardProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function Card({ className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        'bg-gradient-to-br from-ctp-mantle/95 via-ctp-mantle/90 to-ctp-base/80 backdrop-blur-xl rounded-2xl border border-border/50 shadow-xl transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:-translate-y-1.5 hover:border-ctp-mauve/45 hover:shadow-[0_12px_32px_-8px_rgba(203,166,247,0.18)]',
+        'from-ctp-mantle/95 via-ctp-mantle/90 to-ctp-base/80 border-border/50 cubic-bezier(0.16, 1, 0.3, 1) hover:border-ctp-mauve/45 rounded-2xl border bg-gradient-to-br shadow-xl backdrop-blur-xl transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_-8px_rgba(203,166,247,0.18)]',
         className,
       )}
       {...props}
