@@ -31,9 +31,7 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
       result = result.filter((issue) => selectedRepos.includes(issue.repo));
     }
     if (selectedLanguages.length > 0) {
-      result = result.filter((issue) =>
-        issue.tags.some((tag) => selectedLanguages.includes(tag)),
-      );
+      result = result.filter((issue) => issue.tags.some((tag) => selectedLanguages.includes(tag)));
     }
     return result;
   }, [issues, isExploreView, selectedRepos, selectedLanguages]);
