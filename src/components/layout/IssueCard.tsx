@@ -28,8 +28,10 @@ export function IssueCard({ repo, title, description, tags, updated, comments }:
   return (
     <Card className="group flex h-full flex-col font-[var(--font-readable)]">
       <CardHeader>
-        <p className="text-muted-foreground text-xs font-semibold tracking-wide transition-colors group-hover:text-ctp-mauve/80">{repo}</p>
-        <CardTitle className="transition-colors group-hover:text-foreground">{title}</CardTitle>
+        <p className="text-muted-foreground group-hover:text-ctp-mauve/80 text-xs font-semibold tracking-wide transition-colors">
+          {repo}
+        </p>
+        <CardTitle className="group-hover:text-foreground transition-colors">{title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-1">
         <p className="text-muted-foreground/80 text-sm leading-relaxed">{description}</p>
@@ -38,7 +40,7 @@ export function IssueCard({ repo, title, description, tags, updated, comments }:
             <Badge
               key={tag}
               className={cn(
-                'cursor-default transition-all duration-300 hover:scale-105 hover:-translate-y-0.5',
+                'cursor-default transition-all duration-300 hover:-translate-y-0.5 hover:scale-105',
                 tagStyles[tag] ?? '',
               )}
             >
@@ -47,14 +49,14 @@ export function IssueCard({ repo, title, description, tags, updated, comments }:
           ))}
         </div>
       </CardContent>
-      <CardFooter className="text-muted-foreground/70 flex-wrap gap-2 text-xs border-t border-border/20 pt-4">
+      <CardFooter className="text-muted-foreground/70 border-border/20 flex-wrap gap-2 border-t pt-4 text-xs">
         <span>{updated}</span>
         <div className="flex items-center gap-4">
-          <span className="flex cursor-pointer items-center gap-1.5 transition-colors hover:text-ctp-mauve">
+          <span className="hover:text-ctp-mauve flex cursor-pointer items-center gap-1.5 transition-colors">
             <MessageCircle className="h-3.5 w-3.5 transition-transform duration-300 hover:scale-125" />
             {comments}
           </span>
-          <span className="flex cursor-pointer items-center gap-1.5 transition-colors hover:text-ctp-yellow">
+          <span className="hover:text-ctp-yellow flex cursor-pointer items-center gap-1.5 transition-colors">
             <Star className="h-3.5 w-3.5 transition-transform duration-300 hover:scale-125" />
             Save
           </span>
