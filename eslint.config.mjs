@@ -1,24 +1,29 @@
+import js from '@eslint/js';
 import { defineConfig, globalIgnores } from 'eslint/config';
-import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
-import nextTypescript from 'eslint-config-next/typescript';
 import prettierConfig from 'eslint-config-prettier/flat';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   globalIgnores([
     'node_modules/**',
-    '.next/**',
-    'out/**',
-    'build/**',
     'dist/**',
+    'build/**',
     'playwright-report/**',
     'test-results/**',
-    'next-env.d.ts',
   ]),
-  ...nextCoreWebVitals,
-  ...nextTypescript,
-  prettierConfig,
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
+    files: ['**/*.{ts,tsx}'],
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
     rules: {
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -29,4 +34,5 @@ export default defineConfig([
       '@typescript-eslint/consistent-type-imports': ['warn', { prefer: 'type-imports' }],
     },
   },
+  prettierConfig,
 ]);
