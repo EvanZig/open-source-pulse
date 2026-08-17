@@ -2,39 +2,40 @@
 @import 'tw-animate-css';
 
 :root {
-  --background: hsl(240 21% 15%);       /* Base (#1e1e2e) */
-  --foreground: hsl(226 64% 88%);       /* Text (#cdd6f4) */
+  --background: hsl(240 21% 15%); /* Base (#1e1e2e) */
+  --foreground: hsl(226 64% 88%); /* Text (#cdd6f4) */
 
-  --card: hsl(240 21% 12%);             /* Mantle (#181825) */
-  --card-foreground: hsl(226 64% 88%);  /* Text (#cdd6f4) */
+  --card: hsl(240 21% 12%); /* Mantle (#181825) */
+  --card-foreground: hsl(226 64% 88%); /* Text (#cdd6f4) */
 
-  --popover: hsl(240 23% 9%);           /* Crust (#11111b) */
-  --popover-foreground: hsl(226 64% 88%);/* Text (#cdd6f4) */
+  --popover: hsl(240 23% 9%); /* Crust (#11111b) */
+  --popover-foreground: hsl(226 64% 88%); /* Text (#cdd6f4) */
 
-  --primary: hsl(267 84% 81%);          /* Mauve (#cba6f7) */
-  --primary-foreground: hsl(240 23% 9%);/* Crust (#11111b) */
+  --primary: hsl(267 84% 81%); /* Mauve (#cba6f7) */
+  --primary-foreground: hsl(240 23% 9%); /* Crust (#11111b) */
 
-  --secondary: hsl(237 16% 23%);        /* Surface0 (#313244) */
-  --secondary-foreground: hsl(226 64% 88%);/* Text (#cdd6f4) */
+  --secondary: hsl(237 16% 23%); /* Surface0 (#313244) */
+  --secondary-foreground: hsl(226 64% 88%); /* Text (#cdd6f4) */
 
-  --muted: hsl(237 16% 23%);            /* Surface0 (#313244) */
+  --muted: hsl(237 16% 23%); /* Surface0 (#313244) */
   --muted-foreground: hsl(228 20% 72%); /* Subtext0 (#a6adc8) */
 
-  --accent: hsl(234 13% 31%);           /* Surface1 (#45475a) */
-  --accent-foreground: hsl(267 84% 81%);/* Mauve (#cba6f7) */
+  --accent: hsl(234 13% 31%); /* Surface1 (#45475a) */
+  --accent-foreground: hsl(267 84% 81%); /* Mauve (#cba6f7) */
 
-  --destructive: hsl(343 81% 75%);      /* Red (#f38ba8) */
-  --destructive-foreground: hsl(240 23% 9%);/* Crust (#11111b) */
+  --destructive: hsl(343 81% 75%); /* Red (#f38ba8) */
+  --destructive-foreground: hsl(240 23% 9%); /* Crust (#11111b) */
 
-  --border: hsl(237 16% 23%);           /* Surface0 (#313244) */
-  --input: hsl(234 13% 31%);            /* Surface1 (#45475a) */
-  --ring: hsl(267 84% 81%);             /* Mauve (#cba6f7) */
+  --border: hsl(237 16% 23%); /* Surface0 (#313244) */
+  --input: hsl(234 13% 31%); /* Surface1 (#45475a) */
+  --ring: hsl(267 84% 81%); /* Mauve (#cba6f7) */
 
   --radius: 0.5rem;
 }
 
 @theme inline {
-  --font-sans: var(--font-sans);
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-readable: 'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -168,9 +169,13 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
     background-image: radial-gradient(rgba(203, 166, 247, 0.08) 1.2px, transparent 1.2px);
     background-size: 24px 24px;
     background-attachment: fixed;
+  }
+
+  body.font-readable {
+    font-family: var(--font-readable), ui-sans-serif, system-ui, sans-serif;
   }
 }
