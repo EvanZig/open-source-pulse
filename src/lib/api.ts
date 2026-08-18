@@ -2,8 +2,7 @@
  * Thin `fetch` wrapper for the Spring Boot backend.
  *
  * Design goals:
- * - Works in React Server Components (uses the native fetch) and in the browser.
- * - Preserves Next.js caching/ISR semantics via the `next` option.
+ * - Works in the browser SPA (Vite) against `/api` (dev proxy) or a configured base URL.
  * - Surfaces backend errors as a typed `ApiError` so callers can discriminate
  *   network vs. application failures.
  *
@@ -11,8 +10,7 @@
  * functions) will be layered on top of this primitive in a later step.
  */
 
-const DEFAULT_BASE_URL =
-  process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080/api';
+const DEFAULT_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api';
 
 export class ApiError extends Error {
   readonly status: number;
@@ -38,16 +36,15 @@ export interface ApiRequestOptions extends Omit<RequestInit, 'body'> {
    * Query string params appended to the URL.
    */
   searchParams?: Record<string, string | number | boolean | undefined>;
-  /**
-   * Next.js cache/ISR options. Pass `{ revalidate: 3600 }` for hourly ISR.
-   */
-  next?: NextFetchRequestConfig;
 }
 
 function buildUrl(path: string, searchParams?: ApiRequestOptions['searchParams']): string {
   const base = DEFAULT_BASE_URL.endsWith('/') ? DEFAULT_BASE_URL.slice(0, -1) : DEFAULT_BASE_URL;
   const suffix = path.startsWith('/') ? path : `/${path}`;
-  const url = new URL(`${base}${suffix}`);
+  const absolute = `${base}${suffix}`;
+  const url = absolute.startsWith('http')
+    ? new URL(absolute)
+    : new URL(absolute, window.location.origin);
 
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
@@ -61,7 +58,7 @@ function buildUrl(path: string, searchParams?: ApiRequestOptions['searchParams']
 
 export async function apiFetch<TResponse>(
   path: string,
-  { json, searchParams, headers, next, ...init }: ApiRequestOptions = {},
+  { json, searchParams, headers, ...init }: ApiRequestOptions = {},
 ): Promise<TResponse> {
   const url = buildUrl(path, searchParams);
 
@@ -73,7 +70,6 @@ export async function apiFetch<TResponse>(
       ...headers,
     },
     body: json !== undefined ? JSON.stringify(json) : undefined,
-    next,
   });
 
   const contentType = response.headers.get('content-type') ?? '';
