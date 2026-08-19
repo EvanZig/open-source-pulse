@@ -1,6 +1,6 @@
 /**
  * Shared domain types exchanged between the Spring Boot backend and the
- * Next.js frontend. Concrete shapes will be filled in once the REST contract
+ * React SPA. Concrete shapes will be filled in once the REST contract
  * is finalized.
  */
 

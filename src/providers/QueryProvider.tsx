@@ -1,5 +1,3 @@
-'use client';
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState, type PropsWithChildren } from 'react';
@@ -7,11 +5,8 @@ import { useState, type PropsWithChildren } from 'react';
 /**
  * TanStack Query provider.
  *
- * Owns the per-request `QueryClient` so each SSR render gets a fresh cache
- * while the browser re-uses the same instance across client navigations.
- *
- * Keep this as a leaf `'use client'` boundary; server components can still
- * render above it via `children`.
+ * Owns a single `QueryClient` for the SPA lifetime so cached queries survive
+ * client-side navigations and refetches.
  */
 export function QueryProvider({ children }: PropsWithChildren) {
   const [queryClient] = useState(
@@ -34,7 +29,7 @@ export function QueryProvider({ children }: PropsWithChildren) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      {process.env.NODE_ENV === 'development' && (
+      {import.meta.env.DEV && (
         <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
       )}
     </QueryClientProvider>
