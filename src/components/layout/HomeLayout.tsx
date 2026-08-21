@@ -1,5 +1,3 @@
-'use client';
-
 import { useMemo, useState } from 'react';
 import { ChevronDown, ChevronLeft, ChevronRight, SlidersHorizontal, Frown } from 'lucide-react';
 
@@ -15,7 +13,8 @@ type HomeLayoutProps = {
 };
 
 export function HomeLayout({ issues }: HomeLayoutProps) {
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const isSidebarOpen = useUIStore((s) => s.sidebarOpen);
+  const toggleSidebar = useUIStore((s) => s.toggleSidebar);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const defaultTab = useUIStore((s) => s.settings.defaultTab);
   const [activeNavItem, setActiveNavItem] = useState<DefaultTab>(defaultTab);
@@ -56,7 +55,7 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="bg-ctp-pink/10 absolute top-[-20%] left-[-10%] h-[520px] w-[520px] rounded-full blur-[120px]" />
         <div className="bg-ctp-mauve/10 absolute top-[10%] right-[-5%] h-[420px] w-[420px] rounded-full blur-[130px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.04),_transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_55%)]" />
       </div>
 
       <div className="flex h-screen overflow-x-visible overflow-y-hidden">
@@ -108,9 +107,9 @@ export function HomeLayout({ issues }: HomeLayoutProps) {
             aria-label={isSidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             aria-expanded={isSidebarOpen}
             className={cn(
-              'bg-background/80 text-foreground border-border/60 absolute top-93 right-[-1] z-99 hidden rounded-full border shadow-[0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur lg:inline-flex',
+              'bg-background/80 text-foreground border-border/60 absolute top-1/2 right-2 z-50 hidden h-8 w-8 -translate-y-1/2 rounded-full border shadow-[0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur lg:inline-flex',
             )}
-            onClick={() => setSidebarOpen((open) => !open)}
+            onClick={toggleSidebar}
           >
             {isSidebarOpen ? (
               <ChevronLeft className="h-4 w-4" />
