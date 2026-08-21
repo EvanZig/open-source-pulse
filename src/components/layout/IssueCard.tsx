@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { MessageCircle, Star } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -25,8 +26,10 @@ const tagStyles: Record<string, string> = {
 import { cn } from '@/lib/utils';
 
 export function IssueCard({ repo, title, description, tags, updated, comments }: IssueCardProps) {
+  const [saved, setSaved] = useState(false);
+
   return (
-    <Card className="group flex h-full flex-col font-[var(--font-readable)]">
+    <Card className="group flex h-full flex-col">
       <CardHeader>
         <p className="text-muted-foreground group-hover:text-ctp-mauve/80 text-xs font-semibold tracking-wide transition-colors">
           {repo}
@@ -50,16 +53,34 @@ export function IssueCard({ repo, title, description, tags, updated, comments }:
         </div>
       </CardContent>
       <CardFooter className="text-muted-foreground/70 border-border/20 flex-wrap gap-2 border-t pt-4 text-xs">
-        <span>{updated}</span>
+        <span>Updated {updated}</span>
         <div className="flex items-center gap-4">
-          <span className="hover:text-ctp-mauve flex cursor-pointer items-center gap-1.5 transition-colors">
-            <MessageCircle className="h-3.5 w-3.5 transition-transform duration-300 hover:scale-125" />
+          <span
+            className="flex items-center gap-1.5"
+            aria-label={`${comments} comments`}
+            title={`${comments} comments`}
+          >
+            <MessageCircle className="h-3.5 w-3.5" />
             {comments}
           </span>
-          <span className="hover:text-ctp-yellow flex cursor-pointer items-center gap-1.5 transition-colors">
-            <Star className="h-3.5 w-3.5 transition-transform duration-300 hover:scale-125" />
-            Save
-          </span>
+          <button
+            type="button"
+            onClick={() => setSaved((v) => !v)}
+            aria-pressed={saved}
+            aria-label={saved ? `Unsave issue: ${title}` : `Save issue: ${title}`}
+            className={cn(
+              'flex cursor-pointer items-center gap-1.5 rounded-md transition-colors',
+              saved ? 'text-ctp-yellow' : 'hover:text-ctp-yellow',
+            )}
+          >
+            <Star
+              className={cn(
+                'h-3.5 w-3.5 transition-transform duration-300 hover:scale-125',
+                saved && 'fill-current',
+              )}
+            />
+            {saved ? 'Saved' : 'Save'}
+          </button>
         </div>
       </CardFooter>
     </Card>
