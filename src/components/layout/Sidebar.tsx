@@ -8,7 +8,11 @@ import { cn } from '@/lib/utils';
 const languages = [
   { label: 'TypeScript', tone: 'bg-ctp-blue', activeTone: 'border-ctp-blue/50 bg-ctp-blue/15' },
   { label: 'Rust', tone: 'bg-ctp-peach', activeTone: 'border-ctp-peach/50 bg-ctp-peach/15' },
-  { label: 'JavaScript', tone: 'bg-ctp-yellow', activeTone: 'border-ctp-yellow/50 bg-ctp-yellow/15' },
+  {
+    label: 'JavaScript',
+    tone: 'bg-ctp-yellow',
+    activeTone: 'border-ctp-yellow/50 bg-ctp-yellow/15',
+  },
   { label: 'Python', tone: 'bg-ctp-green', activeTone: 'border-ctp-green/50 bg-ctp-green/15' },
 ];
 
@@ -45,7 +49,8 @@ export function Sidebar({ className }: SidebarProps) {
   const removeSelectedRepo = useUIStore((s) => s.removeSelectedRepo);
   const clearAllFilters = useUIStore((s) => s.clearAllFilters);
 
-  const totalFilters = selectedLanguages.length + selectedDifficulties.length + selectedRepos.length;
+  const totalFilters =
+    selectedLanguages.length + selectedDifficulties.length + selectedRepos.length;
 
   const handleAddRepo = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && repoInput.trim()) {
@@ -114,7 +119,13 @@ export function Sidebar({ className }: SidebarProps) {
                   )}
                 >
                   <span className="flex items-center gap-2">
-                    <span className={cn('h-2.5 w-2.5 rounded-full transition-transform', language.tone, isActive && 'scale-125')} />
+                    <span
+                      className={cn(
+                        'h-2.5 w-2.5 rounded-full transition-transform',
+                        language.tone,
+                        isActive && 'scale-125',
+                      )}
+                    />
                     {language.label}
                   </span>
                   {isActive && <Check className="text-ctp-mauve h-3.5 w-3.5" />}
@@ -268,11 +279,23 @@ export function Sidebar({ className }: SidebarProps) {
       {/* Footer */}
       <div className="bg-card/60 border-border/60 mt-auto rounded-2xl border p-4">
         <div className="text-muted-foreground/70 flex items-center justify-between text-xs font-medium">
-          <span className="hover:text-ctp-mauve cursor-pointer transition-colors">
+          <a
+            href="https://github.com/open-source-pulse/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-ctp-mauve transition-colors"
+          >
             Documentation
-          </span>
-          <span className="bg-border/40 h-3 w-px" />
-          <span className="hover:text-ctp-mauve cursor-pointer transition-colors">Feedback</span>
+          </a>
+          <span className="bg-border/40 h-3 w-px" aria-hidden="true" />
+          <a
+            href="https://github.com/open-source-pulse/feedback/issues/new"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-ctp-mauve transition-colors"
+          >
+            Feedback
+          </a>
         </div>
       </div>
     </aside>
