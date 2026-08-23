@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useRef } from 'react';
 import {
   ArrowDownNarrowWide,
@@ -82,7 +80,7 @@ export function SettingsMenu({ open, onClose }: SettingsMenuProps) {
       className="border-border/60 bg-card app-scrollbar absolute right-0 z-50 mt-2 flex max-h-[min(80vh,600px)] w-80 flex-col gap-1 overflow-y-auto rounded-xl border shadow-lg"
     >
       {/* Header */}
-      <div className="bg-card sticky top-0 z-10 flex items-center justify-between border-b border-border/30 px-4 py-3">
+      <div className="bg-card border-border/30 sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3">
         <h3 className="text-sm font-semibold">Settings</h3>
         <Button
           variant="ghost"
@@ -184,8 +182,8 @@ export function SettingsMenu({ open, onClose }: SettingsMenuProps) {
             <Input
               type="password"
               placeholder="ghp_..."
-            value={settings.githubToken ?? ''}
-            onChange={(e) => updateSettings({ githubToken: e.target.value })}
+              value={settings.githubToken ?? ''}
+              onChange={(e) => updateSettings({ githubToken: e.target.value })}
               className="h-8 rounded-xl pl-8 text-xs"
             />
           </div>
@@ -284,9 +282,7 @@ function ToggleRow({
         <div
           className={cn(
             'h-5 w-9 rounded-full border transition-colors',
-            checked
-              ? 'border-ctp-mauve/60 bg-ctp-mauve/80'
-              : 'border-border/60 bg-ctp-surface0/60',
+            checked ? 'border-ctp-mauve/60 bg-ctp-mauve/80' : 'border-border/60 bg-ctp-surface0/60',
           )}
         />
         <div

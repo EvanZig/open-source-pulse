@@ -1,9 +1,8 @@
-'use client';
-
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Bell, Menu, Search, Settings, User } from 'lucide-react';
 
 import { LogoMark } from '@/components/layout/LogoMark';
+import { SettingsMenu } from '@/components/layout/SettingsMenu';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -43,9 +42,32 @@ type TopNavProps = {
 
 export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectItem }: TopNavProps) {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const closeSettings = useCallback(() => setShowSettings(false), []);
+  const notifRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showNotifications) return;
+
+    function handleClick(e: MouseEvent) {
+      if (notifRef.current && !notifRef.current.contains(e.target as Node)) {
+        setShowNotifications(false);
+      }
+    }
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setShowNotifications(false);
+    }
+
+    document.addEventListener('mousedown', handleClick);
+    document.addEventListener('keydown', handleKey);
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener('keydown', handleKey);
+    };
+  }, [showNotifications]);
 
   return (
-    <header className="supports-[backdrop-filter]:bg-background/15 sticky top-0 z-30 flex flex-col gap-3 bg-transparent px-4 py-3 backdrop-blur sm:px-6">
+    <header className="supports-backdrop-filter:bg-background/15 sticky top-0 z-30 flex flex-col gap-3 bg-transparent px-4 py-3 backdrop-blur sm:px-6">
       <div className="flex items-center justify-between gap-3 sm:gap-4">
         <div className="flex items-center gap-4 sm:gap-8">
           <div className="flex items-center gap-3">
@@ -66,7 +88,7 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
             <div className="hidden sm:block">
               <p className="text-sm font-semibold">
                 Open Source{' '}
-                <span className="from-ctp-green via-ctp-teal to-ctp-peach bg-gradient-to-r bg-clip-text text-transparent">
+                <span className="from-ctp-green via-ctp-teal to-ctp-peach bg-linear-to-r bg-clip-text text-transparent">
                   Pulse
                 </span>
               </p>
@@ -102,13 +124,13 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
         <div className="flex items-center justify-end gap-3">
           <div className="relative hidden w-full max-w-md lg:block">
             <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-            <Input placeholder="Search issues, repos, labels..." />
+            <Input placeholder="Search issues, repos, labels..." className="pl-10" />
           </div>
           <Button variant="ghost" size="icon" aria-label="Search" className="lg:hidden">
             <Search className="h-4 w-4" />
           </Button>
 
-          <div className="relative">
+          <div className="relative" ref={notifRef}>
             <Button
               variant="ghost"
               size="icon"
@@ -165,9 +187,17 @@ export function TopNav({ onToggleSidebar, isSidebarOpen, activeItem, onSelectIte
             )}
           </div>
 
-          <Button variant="ghost" size="icon" aria-label="Settings">
-            <Settings className="h-4 w-4" />
-          </Button>
+          <div className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Settings"
+              onClick={() => setShowSettings((v) => !v)}
+            >
+              <Settings className="h-4 w-4" />
+            </Button>
+            <SettingsMenu open={showSettings} onClose={closeSettings} />
+          </div>
           <Button variant="ghost" size="icon" aria-label="Profile">
             <User className="h-4 w-4" />
           </Button>
