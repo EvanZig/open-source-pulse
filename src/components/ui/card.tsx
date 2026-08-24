@@ -8,7 +8,7 @@ export function Card({ className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        'from-ctp-mantle/95 via-ctp-mantle/90 to-ctp-base/80 border-border/50 cubic-bezier(0.16, 1, 0.3, 1) hover:border-ctp-mauve/45 rounded-2xl border bg-gradient-to-br shadow-xl backdrop-blur-xl transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_-8px_rgba(203,166,247,0.18)]',
+        'from-ctp-mantle/95 via-ctp-mantle/90 to-ctp-base/80 border-border/50 hover:border-ctp-mauve/45 rounded-2xl border bg-linear-to-br shadow-xl backdrop-blur-xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-[0_12px_32px_-8px_rgba(203,166,247,0.18)]',
         className,
       )}
       {...props}
