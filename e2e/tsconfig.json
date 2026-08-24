@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "types": ["node", "@playwright/test"],
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "isolatedModules": false
   },
   "include": ["./**/*.ts"],
