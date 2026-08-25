@@ -5,6 +5,6 @@ test.describe('Open Source Pulse — smoke', () => {
     await page.goto('/');
 
     await expect(page).toHaveTitle(/Open Source Pulse/);
-    await expect(page.getByRole('heading', { name: 'Open Source Pulse' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Explore issues' })).toBeVisible();
   });
 });
