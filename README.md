@@ -28,8 +28,6 @@ cp .env.example .env
 bun run dev
 ```
 
-Open http://localhost:3000. Vite proxies `/api` to the Spring Boot service at http://localhost:8080.
-
 ## Scripts
 
 | Script                | Purpose                        |
